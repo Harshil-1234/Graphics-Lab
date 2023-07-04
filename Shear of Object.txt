@@ -1,0 +1,38 @@
+#include <graphics.h>
+
+void shearSquare(int x, int y, int sideLength, double shearFactor) {
+    // Initialize graphics
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, NULL);
+
+    // Calculate the coordinates of the square
+    int x1 = x - sideLength / 2;
+    int y1 = y - sideLength / 2;
+    int x2 = x + sideLength / 2;
+    int y2 = y + sideLength / 2;
+
+    // Draw the original square
+    rectangle(x1, y1, x2, y2);
+
+    // Shear the square
+    int shearedX1 = x1 + shearFactor * y1;
+    int shearedY1 = y1;
+    int shearedX2 = x2 + shearFactor * y2;
+    int shearedY2 = y2;
+
+    rectangle(shearedX1, shearedY1, shearedX2, shearedY2);
+
+    getch();
+    closegraph();
+}
+
+int main() {
+    int x = 250;                 
+    int y = 250;                 
+    int sideLength = 200;        
+    double shearFactor = 0.5;    
+
+    shearSquare(x, y, sideLength, shearFactor);
+
+    return 0;
+}

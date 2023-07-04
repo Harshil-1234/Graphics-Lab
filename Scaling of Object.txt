@@ -1,0 +1,41 @@
+#include <graphics.h>
+
+void scaleSquare(int x, int y, int sideLength, double scaleFactor) {
+    // Initialize graphics
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm,NULL);
+    
+    int x1 = x - sideLength / 2;
+    int y1 = y - sideLength / 2;
+    int x2 = x + sideLength / 2;
+    int y2 = y + sideLength / 2;
+
+    rectangle(x1, y1, x2, y2);
+
+    // Scale the square
+    int scaledX1 = x1 * scaleFactor;
+    int scaledY1 = y1 * scaleFactor;
+    int scaledX2 = x2 * scaleFactor;
+    int scaledY2 = y2 * scaleFactor;
+
+    rectangle(scaledX1, scaledY1, scaledX2, scaledY2);
+
+    
+    getch();
+    closegraph();
+}
+
+int main() {
+    int x,y;              
+    int sideLength=200;      
+    double scaleFactor;
+    printf("Enter the coordinates center of squares x and y: ");
+    scanf("%d %d",&x,&y);
+
+    printf("Enter the factor of scaling to be done: ");
+    scanf("%d", &scaleFactor);
+    scaleSquare(x, y, sideLength, scaleFactor);
+
+    return 0;
+}
+

@@ -1,0 +1,37 @@
+#include <graphics.h>
+
+void reflectTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+    // Initialize graphics
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, NULL);
+
+    // Draw the original triangle
+    line(x1, y1, x2, y2);
+    line(x2, y2, x3, y3);
+    line(x3, y3, x1, y1);
+
+    // Reflect the triangle by changing the signs of the y-coordinates
+    int reflectedY1 = -y1;
+    int reflectedY2 = -y2;
+    int reflectedY3 = -y3;
+
+    // Draw the reflected triangle
+    line(x1, reflectedY1, x2, reflectedY2);
+    line(x2, reflectedY2, x3, reflectedY3);
+    line(x3, reflectedY3, x1, reflectedY1);
+
+    getch();
+    closegraph();
+}
+
+int main() {
+    int x1, y1;   // First vertex
+    int x2, y2;   // Second vertex
+    int x3, y3;  
+    printf("Enter the coordinates of the triangle (x1 y1 x2 y2 x3 y3): ");
+    scanf("%d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3);
+
+    reflectTriangle(x1, y1, x2, y2, x3, y3);
+
+    return 0;
+}

@@ -1,0 +1,57 @@
+#include <graphics.h>
+#include <cmath>
+
+void rotateTriangle(int x1, int y1, int x2, int y2, int x3, int y3, double angle) {
+    // Initialize graphics
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, NULL);
+
+    line(x1, y1, x2, y2);
+    line(x2, y2, x3, y3);
+    line(x3, y3, x1, y1);
+
+    double radians = angle * M_PI / 180.0;
+
+    double cosAngle = cos(radians);
+    double sinAngle = sin(radians);
+
+    x1 -= x2;
+    y1 -= y2;
+    x3 -= x2;
+    y3 -= y2;
+
+    // Rotate the triangle
+    int newX1 = round(x1 * cosAngle - y1 * sinAngle);
+    int newY1 = round(x1 * sinAngle + y1 * cosAngle);
+    int newX3 = round(x3 * cosAngle - y3 * sinAngle);
+    int newY3 = round(x3 * sinAngle + y3 * cosAngle);
+
+    newX1 += x2;
+    newY1 += y2;
+    newX3 += x2;
+    newY3 += y2;
+
+    line(newX1, newY1, x2, y2);
+    line(x2, y2, newX3, newY3);
+    line(newX3, newY3, newX1, newY1);
+
+    getch();
+    closegraph();
+}
+
+int main() {
+
+    int x1, y1;   // First vertex
+    int x2, y2;   // Second vertex
+    int x3, y3;   // Third vertex
+    double angle;      // Rotation angle in degrees
+    printf("Enter the coordinates of the triangle (x1 y1 x2 y2 x3 y3): ");
+    scanf("%d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3);
+
+    printf("Enter the rotation angle: ");
+    scanf("%d", &angle);
+
+    rotateTriangle(x1, y1, x2, y2, x3, y3, angle);
+
+    return 0;
+}

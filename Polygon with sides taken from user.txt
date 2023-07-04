@@ -1,0 +1,38 @@
+#include <graphics.h>
+#include <cmath>
+
+void generatePolygon(int sides) {
+    const int centerX = 250;  // X-coordinate of the center of the polygon
+    const int centerY = 250;  // Y-coordinate of the center of the polygon
+    const int radius = 200;  
+
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, NULL);
+
+    // Calculate the angle between each side
+    double angle = 2 * M_PI / sides;
+
+    // Generate the vertices of the polygon
+    for (int i = 0; i < sides; i++) {
+        int x = centerX + radius * cos(i * angle);
+        int y = centerY + radius * sin(i * angle);
+        int nextX = centerX + radius * cos((i + 1) * angle);
+        int nextY = centerY + radius * sin((i + 1) * angle);
+
+        // Draw a line segment between current and next vertex
+        line(x, y, nextX, nextY);
+    }
+
+    getch();
+    closegraph();
+}
+
+int main() {
+    int sides;
+    printf("Enter the number of sides for the polygon: ");
+    scanf("%d", &sides);
+
+    generatePolygon(sides);
+
+    return 0;
+}
